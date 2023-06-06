@@ -7,6 +7,9 @@ use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Mail;
+use PDF;
 
 class LoginController extends Controller
 {
@@ -59,13 +62,40 @@ class LoginController extends Controller
             $newUser->address = $request->address;
             $newUser->password = bcrypt('password');
             $newUser->role = 'user';
-            $newUser->save();
-            return redirect()->back()->with(['success' => 'Silahkan cek email!']);
+
+
+            $data = [
+                'user' => $newUser,
+                'email' => $newUser->email,
+                'client_name' => $newUser->name,
+                'subject' => 'Tiket Online',
+                'qrcode' => QrCode::size(400)->generate($request->name),
+            ];
+
+            // $qrcode = QrCode::size(400)->generate($data["email"]);
+            $pdf = PDF::loadView('mail.tiket', $data)->setPaper('a4', 'landscape');
+
+
+            try {
+                Mail::send('mail.tiket', $data, function ($message) use ($data, $pdf) {
+                    $message->to($data["email"], $data["client_name"])
+                        ->subject($data["subject"])
+                        ->attachData($pdf->output(), "Tiket Online.pdf");
+                });
+
+                $newUser->save();
+                return redirect()->back()->with(['success' => 'Silahkan cek email!']);
+            } catch (JWTException $exception) {
+                return redirect()->back()->with(['danger' => 'Silahkan coba regis ulang!']);
+            }
+
         else :
             return redirect()->back()->with(['danger' => 'Email sudah terdaftar']);
 
         endif;
     }
+
+
 
     public function dashboard()
     {

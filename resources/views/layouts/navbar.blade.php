@@ -10,17 +10,17 @@
       <span class="mdi mdi-menu"></span>
     </button>
     <div class="search-field d-none d-md-block">
-      <form class="d-flex align-items-center h-100" action="#">
+      <!-- <form class="d-flex align-items-center h-100" action="#">
         <div class="input-group">
           <div class="input-group-prepend bg-transparent">
             <i class="input-group-text border-0 mdi mdi-magnify"></i>
           </div>
           <input type="text" class="form-control bg-transparent border-0" placeholder="Search projects">
         </div>
-      </form>
+      </form> -->
     </div>
     <ul class="navbar-nav navbar-nav-right">
-      <li class="nav-item nav-profile dropdown">
+      <!-- <li class="nav-item nav-profile dropdown">
         <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
           <div class="nav-profile-img">
             <img src="assets/images/faces/face1.jpg" alt="image">
@@ -130,17 +130,17 @@
           <div class="dropdown-divider"></div>
           <h6 class="p-3 mb-0 text-center">See all notifications</h6>
         </div>
-      </li>
+      </li> -->
       <li class="nav-item nav-logout d-none d-lg-block">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('logout') }}">
           <i class="mdi mdi-power"></i>
         </a>
       </li>
-      <li class="nav-item nav-settings d-none d-lg-block">
+      <!-- <li class="nav-item nav-settings d-none d-lg-block">
         <a class="nav-link" href="#">
           <i class="mdi mdi-format-line-spacing"></i>
         </a>
-      </li>
+      </li> -->
     </ul>
     <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-bs-toggle="offcanvas">
       <span class="mdi mdi-menu"></span>

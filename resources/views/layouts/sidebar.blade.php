@@ -19,8 +19,8 @@
 
 
     @if ( Auth::user()->role == 'admin' )
-    <li class="nav-item">
-      <a class="nav-link {{ (Request::is('dashboard') ? 'active' : '') }}" href="{{ url('dashboard') }}">
+    <li class="nav-item {{ (Request::is('dashboard') ? 'active' : '') }}">
+      <a class="nav-link " href="{{ url('dashboard') }}">
         <span class="menu-title">Dashboards</span>
         <i class="mdi mdi-home menu-icon"></i>
       </a>
